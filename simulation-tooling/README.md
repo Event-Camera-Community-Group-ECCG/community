@@ -16,7 +16,7 @@ The objective of this document is to consolidate information about all of the va
         - Still takes RGB frames and converts them to event camera frames, effectively a ROS 2 node wrapping the SensorsINI v2e emulator 
         - Conversion is a sceondary process from the initial rgb frame production (i.e. need to start ros2 process, subscribe to rgb frames already being published from gazebo to a ros2 topic, convert, re-publish)   
 - NVidia Isaac Sim (__Unsupported__)  
- - Event camera sensor directly/natively in isaac sim seems unsupported, but recently some work on taking camera frames from Isaac Simulation and pushed them through an existing v2e toolchain - [link](https://arxiv.org/html/2503.04838v1#:~:text=This%20paper%20presents%20a%20simulation,To%20validate%20both%20this)
+    - Event camera sensor directly/natively in isaac sim seems unsupported, but recently some work on taking camera frames from Isaac Simulation and pushed them through an existing v2e toolchain - [link](https://arxiv.org/html/2503.04838v1#:~:text=This%20paper%20presents%20a%20simulation,To%20validate%20both%20this)
   
 # Dataset Tooling (video-2-event) and Datasets  
 
