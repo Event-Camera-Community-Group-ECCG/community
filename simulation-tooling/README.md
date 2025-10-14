@@ -1,12 +1,23 @@
 # Simulation Tooling Support for Event Cameras
 The objective of this document is to consolidate information about all of the various simulation-tooling options out in the larger development community for event cameras. A significant amount of work has been done across a number of different organizations; there are some existing documents out there with comprehensive summaries of every single resource available for event cameras, however this will serve to highlight only those resources related to simulation. 
 
+# Overview
+There has been some open-source work on supporting event camera simulation, the most notable/reliable being that of ESIM from University of Zurich's Robotics and Perception Group (RPG). Notable open source robotics simulators which seem to support event camera simulation are CARLA and ESIM; Gazebo classic had some support years ago, but since the upgrade to Ignition, the DVS camera plugin did not get migrated, so support seems to be floating at this point for Gazebo. 
+
+The main approaches today working with event cameras without the real hardware tend to revolve around either a.) simulation whereby the event camera frames are generated using a combination of real-hardware inspired pixel activation thresholding, rgb frames input, and inter-frame interpolation using different techniques (optical flow, scene duynamics, known camera trajectories, etc. etc.), or b.) post-processing techniques which take as an input and as an output via the conversion process (and tuning) a stream of event-camera frames.   
+
+
 # Simulation Platforms with Existing Event Camera Simulation Support
 
 - [rpg_esim](https://github.com/uzh-rpg/rpg_esim) (__Supported__)  
     - Unreal Engine based  
+    - Designed to accurately model an event camera output given a 3D scene and a trajectory as inputs. Introduced a novel adaptive rendering approach to efficiently leverage the scene dynamics to interpolate and meet the high-frequency frame targets that real event cameras can require.  
 - [CARLA](https://github.com/carla-simulator/carla/blob/ue5-dev/Unreal/CarlaUnreal/Plugins/Carla/Source/Carla/Sensor/DVSCamera.cpp) (__Supported__) 
     - Added in CARLA 0.9.10  
+    - Frame-based approximation of a true event camera  
+    - Sim-to-real gap is real and [problematic](https://arxiv.org/html/2506.13722v1) due to the fact simulation support is always using rgb frames as the source and doing some sort of conversion.  
+        - Some proposals on how to improve simulation performance multiple orders of magnitude have been made, this paper as one [example](https://arxiv.org/pdf/2209.04634)  
+            - Generally appraoches to "improve" event camera simulation leverage somethign like optical flow and fast linear interpolation to artificially increase the frame rate, which this paper leverages.  
 - Gazebo (__Unsupported__) 
     - [DVS Gazebo Classic plugin](https://github.com/HBPNeurorobotics/gazebo_dvs_plugin) - Old, deprecated
     - ["Modern" Gazebo](https://github.com/gazebosim/gz-sensors/tree/gz-sensors10) - Not supported/gazebo classic support not migrated, doesn't seem to have a .cc for dvs camera  
@@ -31,6 +42,9 @@ The objective of this document is to consolidate information about all of the va
 - [Institute of Neuroinformatics (INI) V2E (Video 2 Event) Toolbox](https://openaccess.thecvf.com/content/CVPR2021W/EventVision/papers/Hu_v2e_From_Video_Frames_to_Realistic_DVS_Events_CVPRW_2021_paper.pdf) - [Code](https://github.com/SensorsINI/v2e)    
     - Brings improvements to the generation of synthetic datasets covering a range of illumination conditions, addressing the shortcomings of rpg_vid2e with generating event-data sets from video with non-ideal/poor lighting conditions  
     - v2eCore can be imported and used in python software, as is demonstrated in the SEBVS project out of ASU  
-
+- v2e Tool hosted in google [colab](https://colab.research.google.com/drive/1czx-GJnx-UkhFVBbfoACLVZs8cYlcr_M?usp=sharing)  
+    - Nice example of the limitations still of the v2e tool on realness of output of the v2e tool - [link](https://sites.google.com/view/video2events/home#h.p_P7CP9Cu4bygh)  
 
 ## Datasets  
+- N-Caltech101 dataset - [download](http://rpg.ifi.uzh.ch/data/VID2E/ncaltech_syn_images.zip)  
+- 
