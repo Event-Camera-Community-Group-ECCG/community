@@ -4,7 +4,7 @@ The objective of this document is to consolidate information about all of the va
 # Overview
 There has been some open-source work on supporting event camera simulation, the most notable/reliable being that of ESIM from University of Zurich's Robotics and Perception Group (RPG). Notable open source robotics simulators which seem to support event camera simulation are CARLA and ESIM; Gazebo classic had some support years ago, but since the upgrade to Ignition, the DVS camera plugin did not get migrated, so support seems to be floating at this point for Gazebo. 
 
-The main approaches today working with event cameras without the real hardware tend to revolve around either a.) simulation whereby the event camera frames are generated using a combination of real-hardware inspired pixel activation thresholding, rgb frames input, and inter-frame interpolation using different techniques (optical flow, scene duynamics, known camera trajectories, etc. etc.), or b.) post-processing techniques which take as an input and as an output via the conversion process (and tuning) a stream of event-camera frames.   
+The main approaches today working with event cameras without the real hardware tend to revolve around either a.) simulation whereby the event camera frames are generated using a combination of real-hardware inspired pixel activation thresholding, rgb frames input, and inter-frame interpolation using different techniques (optical flow, scene dynamics, known camera trajectories, etc. etc.), or b.) post-processing techniques which take as an input and as an output via the conversion process (and tuning) a stream of event-camera frames.   
 
 
 # Simulation Platforms with Existing Event Camera Simulation Support
@@ -16,8 +16,8 @@ The main approaches today working with event cameras without the real hardware t
     - Added in CARLA 0.9.10  
     - Frame-based approximation of a true event camera  
     - Sim-to-real gap is real and [problematic](https://arxiv.org/html/2506.13722v1) due to the fact simulation support is always using rgb frames as the source and doing some sort of conversion.  
-        - Some proposals on how to improve simulation performance multiple orders of magnitude have been made, this paper as one [example](https://arxiv.org/pdf/2209.04634)  
-            - Generally appraoches to "improve" event camera simulation leverage somethign like optical flow and fast linear interpolation to artificially increase the frame rate, which this paper leverages.  
+        - Some proposals on how to improve simulation performance multiple ordesrs of magnitude have been made, this paper as one [example](https://arxiv.org/pdf/2209.04634)  
+            - Generally approaches to "improve" event camera simulation leverage somethign like optical flow and fast linear interpolation to artificially increase the frame rate, which this paper leverages.  
 - Gazebo (__Unsupported__) 
     - [DVS Gazebo Classic plugin](https://github.com/HBPNeurorobotics/gazebo_dvs_plugin) - Old, deprecated
     - ["Modern" Gazebo](https://github.com/gazebosim/gz-sensors/tree/gz-sensors10) - Not supported/gazebo classic support not migrated, doesn't seem to have a .cc for dvs camera  
@@ -25,9 +25,13 @@ The main approaches today working with event cameras without the real hardware t
     - [Arizona State University "SEBVS" Project, Aug' 25](https://eventbasedvision.github.io/SEBVS/) - [Arvix link](https://arxiv.org/abs/2508.17643)
         - Provides an open-source ROS2 package for the Gazebo simulator that generates these event streams from standard RGB cameras  
         - Still takes RGB frames and converts them to event camera frames, effectively a ROS 2 node wrapping the SensorsINI v2e emulator 
-        - Conversion is a sceondary process from the initial rgb frame production (i.e. need to start ros2 process, subscribe to rgb frames already being published from gazebo to a ros2 topic, convert, re-publish)   
+        - Conversion is a secondary process from the initial rgb frame production (i.e. need to start ros2 process, subscribe to rgb frames already being published from gazebo to a ros2 topic, convert, re-publish)   
 - NVidia Isaac Sim (__Unsupported__)  
-    - Event camera sensor directly/natively in isaac sim seems unsupported, but recently some work on taking camera frames from Isaac Simulation and pushed them through an existing v2e toolchain - [link](https://arxiv.org/html/2503.04838v1#:~:text=This%20paper%20presents%20a%20simulation,To%20validate%20both%20this)
+    - Event camera sensor directly/natively in isaac sim seems unsupported, but recently some work on taking camera frames from Isaac Simulation and pushed them through an existing v2e toolchain - [link](https://arxiv.org/html/2503.04838v1#:~:text=This%20paper%20presents%20a%20simulation,To%20validate%20both%20this)  
+- Vista 2.0 [paper](https://arxiv.org/abs/2111.12083) - [Documentation site](https://vista.csail.mit.edu/)  - (__Supported__)  
+    - Supports an event camera model which uses RGB frames as the basis for synthesizing event camera frames. Supports two types of operation:  
+        1. synthesize event frames using rgb frames and interpolating and generating event pixels, very similar to the typical approaches seen in prior work  
+        2. Instead of synthesizing, use the metavision_core.event_io.raw_reader.RawReader object from the metavision sdk and read a stream of event data in from the filesystem  
   
 # Dataset Tooling (video-2-event) and Datasets  
 
