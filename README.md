@@ -27,11 +27,11 @@ The following subprojects are owned by the Community Group:
     * [linux-sensor-drivers](https://github.com/TOTON95/linux-sensor-drivers-prophesee)
     * Status: In development 🚧
 
-* **Metavision SDK Installer Package for AMD Kria development using Petalinux**
-  * Description: Make the petalinux installer and Prophesee petalinux tools repos easier to install
+* **Docker Image for Metavision SDK (AMD Kria development using Ubuntu)**
+  * Description: Make the Prophesee metavision repo and dependencies for the Kria embedded kit (event markers demo) easier to install via Kria Docker
   *  Respositories:
-     * [metavision-sdk-installer](https://github.com/Event-Camera-Community-Group-ECWG/metavision-sdk-installer)
-     * Status: In development 🚧 (Need CI/CD and integration into docker image)
+     * [kria-docker](https://github.com/Event-Camera-Community-Group-ECCG/kria-docker)
+     * Status: In development 🚧 (Need CI/CD through jenkins/gitlab etc)
 
 *  **Metavision Embedded Markers Example Adapt to ROS 2**
    * Description: Adapt the existing pose markers example from Prophesee to a ROS 2 package
