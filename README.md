@@ -37,11 +37,11 @@ The following subprojects are owned by the Community Group:
    * Description: Adapt the existing pose markers example from Prophesee to a ROS 2 package
     * Repositories:
       * [metavision-event-markers](https://github.com/Event-Camera-Community-Group-ECWG/metavision-event-markers)
-      * Status: Builds, Needs testing on target hardware (AMD Kria KV260) 📏
+      * Status: Compiles and runs (AMD Kria KV260), needs debian package hosting 🏁
 
 *  **Evaluation of Existing Simulation Tooling**
    * Description: Look into existing simulation tooling for event sensors (gazebo, isaac sim, etc)
-    * Status: 🚧
+    * Status: Community Notes Merged 🏁
 
 *  **Non-profit Exploratory/Market research into Event perception product fit**
    * Description: Look into non-profit status and research event perception solution 
